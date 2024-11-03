@@ -112,5 +112,5 @@ function refreshTrackers(userHash) {
     function fillTrackers() {
         getTrackers(userHash);
     }
-    setTimeout(fillTrackers, 500);
+    setTimeout(fillTrackers, 250);
 }
