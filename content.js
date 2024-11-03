@@ -1,21 +1,19 @@
-// import { userHash } from "script.js"
 const apiLink = "http://127.0.0.1:8989"
 
-document.addEventListener("click",
-    function(e) {
-        if (e.shiftKey) {
-            let selector = getSelector(document.elementFromPoint(e.clientX, e.clientY))
-            setTracker(selector);
-        }
+document.addEventListener("click", function(e) {
+    if (e.shiftKey) {
+        let cssSelector = getCssSelector(document.elementFromPoint(e.clientX, e.clientY))
+        setLastTracker(cssSelector);
+    }
     }, false
 )
 
-function getSelector(element) {
+function getCssSelector(element) {
     let block = element.nodeName;
-    element.classList.forEach(cl => block += '.' + cl);
-    if (element.id) block += '#' + element.id;
-        
-    if (!element.id && element.parentElement) {
+    element.classList.forEach(clss => block += '.' + clss);
+    if (element.id) {
+        block += '#' + element.id;
+    } else if (element.parentElement) {
         let result = getSelector(element.parentElement);
         result.push(block);
         return result;
@@ -23,9 +21,7 @@ function getSelector(element) {
     return [block];
 }
 
-function setTracker(selector) {
-    let url = window.location.href
-    chrome.storage.sync.set({"URL": url})
-    chrome.storage.sync.set({"SELECTOR": selector.join(' ')})
-    console.log(selector.join(" "))
+function setLastTracker(cssSelector) {
+    chrome.storage.sync.set({"TRACKERURL": window.location.href})
+    chrome.storage.sync.set({"CSSSELECTOR": cssSelector.join(' ')})
 }
