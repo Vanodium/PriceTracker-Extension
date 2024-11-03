@@ -68,21 +68,21 @@ function displayTrackers(userHash, trackers) {
 }
 
 function deleteTrackerRequest(userHash, trackerId) {
-    let params = new URLSearchParams({"UserHash": userHash, "TrackerId":trackerId});
+    let searchParameters = new URLSearchParams({"UserHash": userHash, "TrackerId": trackerId});
 
-    fetch(`${apiLink}/trackers?${params.toString()}`, {method: "DELETE"})
+    fetch(`${apiLink}/trackers?${searchParameters.toString()}`, {method: "DELETE"})
     .then(response => {
         if (!response.ok) {
             throw new Error("Could not get the token " + response.statusText);
         }
-        console.log("Deleted tracker")
-        document.getElementById(`tracker ${trackerId}`).remove()
+        console.log("Deleted tracker");
+        document.getElementById(`tracker ${trackerId}`).remove();
     })
 }
 
 function addTracker(userHash) {
     chrome.storage.sync.get(["TRACKERURL"], function(data) {
-        let trackerUrl = data["URL"]
+        let trackerUrl = data["TRACKERURL"]
 
         chrome.storage.sync.get(["CSSSELECTOR"], function(data) {
             cssSelector = data["CSSSELECTOR"]
@@ -94,11 +94,12 @@ function addTracker(userHash) {
 }
 
 function addTrackerRequest(searchParameters) {
+    console.log(searchParameters.toString());
     fetch(`${apiLink}/trackers?${searchParameters.toString()}`, {method: "POST"})
     .then(response => {
         if (!response.ok) {
             throw new Error("Could not get the token " + response.statusText);
         }
-        console.log("Added tracker")
+        console.log("Added tracker");
     })
 }

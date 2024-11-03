@@ -14,7 +14,7 @@ function getCssSelector(element) {
     if (element.id) {
         block += '#' + element.id;
     } else if (element.parentElement) {
-        let result = getSelector(element.parentElement);
+        let result = getCssSelector(element.parentElement);
         result.push(block);
         return result;
     }
@@ -24,4 +24,5 @@ function getCssSelector(element) {
 function setLastTracker(cssSelector) {
     chrome.storage.sync.set({"TRACKERURL": window.location.href})
     chrome.storage.sync.set({"CSSSELECTOR": cssSelector.join(' ')})
+    console.log(window.location.href, cssSelector.join(' '))
 }
