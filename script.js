@@ -3,6 +3,7 @@ const apiLink = "http://127.0.0.1:8989"
 
 chrome.storage.sync.get(["USERHASH"], (data) => {
     let userHash = data["USERHASH"]
+    console.log(userHash)
     if (userHash == undefined) {
         changeVisibility("flex", "oauth-layout");
         changeVisibility("none", "trackers-layout");
@@ -26,12 +27,13 @@ function changeVisibility(status, blockId="", blockClass="") {
 }
 
 function sendAuthRequest() {
-    fetch(`${apiLink}/auth/oauth`, { 
+    fetch(`${apiLink}/auth/token`, { 
         method: 'GET'
     })
     .then(function(response) { return response.json(); })
     .then(function(json) {
-        {chrome.storage.sync.set({"USERHASH": json["data"]})};
+        chrome.storage.sync.set({"USERHASH": json["data"]});
+        chrome.runtime.reload()
     });
 }
 
@@ -76,7 +78,7 @@ function deleteTrackerRequest(userHash, trackerId) {
             throw new Error("Could not get the token " + response.statusText);
         }
         console.log("Deleted tracker");
-        document.getElementById(`tracker ${trackerId}`).remove();
+        refreshTrackers(userHash)
     })
 }
 
@@ -89,6 +91,7 @@ function addTracker(userHash) {
 
             let searchParameters = new URLSearchParams({"UserHash": userHash, "TrackerUrl": trackerUrl, "CssSelector": cssSelector});
             addTrackerRequest(searchParameters)
+            refreshTrackers(userHash);
         });
     });
 }
@@ -102,4 +105,12 @@ function addTrackerRequest(searchParameters) {
         }
         console.log("Added tracker");
     })
+}
+
+function refreshTrackers(userHash) {
+    document.getElementById("trackers-list").innerHTML = "";
+    function fillTrackers() {
+        getTrackers(userHash);
+    }
+    setTimeout(fillTrackers, 500);
 }
