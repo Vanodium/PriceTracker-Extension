@@ -1,0 +1,200 @@
+<html dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="developer" href="https://github.com/Vanodium">
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, 
+        p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, 
+        dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, tt, 
+        var, b, u, i, center, fieldset, form, label, legend, table, caption, 
+        tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+        embed, figure, figcaption, footer, header, hgroup, menu, nav, output, 
+        ruby, section, summary, time, mark, audio, video {
+            padding: 0; font: inherit; font-size: 100%; vertical-align: baseline; border: 0;
+        }
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block}
+        @-moz-document url-prefix(http://) {
+            button::-moz-focus-inner, 
+            input[type="button"]::-moz-focus-inner, 
+            input[type="submit"]::-moz-focus-inner, 
+            input[type="reset"]::-moz-focus-inner {
+                padding: 0 !important; 
+                border: 0 none !important;
+            }
+        }
+        html {touch-action: manipulation; -webkit-text-size-adjust: 100%; tab-size: 4}
+        body {
+            font-family: "-apple-system", "Segoe UI", "Roboto", "Open Sans", 
+            "Helvetica Neue", "system-ui", sans-serif; 
+            font-size: 16px; 
+            line-height: 140%; 
+            font-weight: normal; 
+            background-color: #3B3030; 
+            color: #FFF0D1; 
+            padding: 1.2em;
+            display:flex;
+            align-items: center;
+
+        }
+        #oauth-layout {
+            display: none; 
+            flex-direction: column; 
+            min-width: 20em;
+            justify-content: center; 
+            align-items: center;
+            padding: 1em;
+        }
+    
+        #auth-button {
+            position: relative; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            padding: 0.5em; 
+            outline: none; 
+            border: none; 
+            text-align: center; 
+            font-size: 2em; 
+            background-color: #664343; 
+            color: #FFF0D1; 
+            cursor: pointer;
+        }
+    
+        #auth-button:hover {
+            background-color: #795757;
+        }
+
+        #trackers-layout {
+		display: none;
+		flex-direction: column;
+		padding: 1.2em;
+		min-width: 20em;
+		gap: 0.75em;
+        }
+
+        div.header {
+            font-size: 2.88em;
+            position: sticky;
+            top: 0;
+            font-weight: 500;
+            flex-grow: 0;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        div.header div.add-button button {
+            position: relative;
+            overflow: hidden;
+            text-indent: 200%;
+            white-space: nowrap;
+            width: 1.08em;
+            height: 1.08em;
+            min-width: 1em;
+            outline: none;
+            border: none;
+            text-align: center;
+            font-size: 0.96em;
+            background-color: #664343;
+            color: #FFF0D1;
+            cursor: pointer;
+        }
+
+        div.header div.add-button button:hover {
+            background-color: #795757;
+        }
+
+        div.header div.add-button button::before,
+        div.header div.add-button button::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -30%;
+            margin-top: -2px;
+            width: 60%;
+            height: 4px;
+            background-color: #FFF0D1;
+        }
+
+        div.header div.add-button button::after {
+            transform: rotate(90deg);
+        }
+
+        div.trackers {
+            background-color: #FFF0D1;
+            overflow-y: auto;
+            max-height: 20em;
+            scrollbar-width: thin;
+            scrollbar-color: #664343 #FFF0D1;
+        }
+
+        div.trackers ul {
+            flex-grow: 1;
+            list-style: none;
+            padding: 0.5em;
+            padding-top: 0.25em;
+            margin: 0;
+            width: 90%;
+        }
+
+        div.trackers ul li {
+            padding: 0;
+            margin: 0.25em 0 0.5em 0;
+            display: flex;
+            flex-direction: row;
+        }
+
+        div.trackers ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        div.trackers ul li a {
+            flex-grow: 1;
+            overflow: hidden;
+            padding: 0.10em 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #664343;
+        }
+
+        div.trackers ul li a:hover {
+            text-decoration: underline;
+        }
+
+        div.trackers ul li button {
+            letter-spacing: 0.1em;
+            outline: none;
+            border: none;
+            background-color: #664343;
+            color: #FFF0D1;
+            cursor: pointer;
+        }
+
+        div.trackers ul li button:hover {
+            background-color: #795147;
+        }
+    </style>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="oauth-layout">
+        <button id="auth-button">Login with Google</button>
+    </div>
+
+    <div id="trackers-layout">
+        <div class="header">
+            <div class="title">trackers</div>
+            <div class="add-button" id="add-button-block">
+                <button id="add-button">+</button>
+            </div>
+        </div>
+        <div class="trackers">
+            <ul id="trackers-list">
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
