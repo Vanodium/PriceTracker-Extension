@@ -1,5 +1,3 @@
-const apiLink = "http://127.0.0.1:8989"
-
 document.addEventListener("click", function(e) {
     if (e.shiftKey) {
         let cssSelector = getCssSelector(document.elementFromPoint(e.clientX, e.clientY))
