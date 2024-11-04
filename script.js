@@ -108,9 +108,21 @@ function addTrackerRequest(searchParameters) {
 }
 
 function refreshTrackers(userHash) {
-    document.getElementById("trackers-list").innerHTML = "";
-    function fillTrackers() {
-        getTrackers(userHash);
+    function fade(delta) {
+        let trackersBlock
+        let currentOpacity
+        for (i = 0; i < 10; i++) {           
+            setTimeout(() => {
+                trackersBlock = document.getElementById("trackers-block");
+                currentOpacity = parseFloat(getComputedStyle(trackersBlock).opacity) + delta
+                trackersBlock.style.opacity = currentOpacity.toString();
+            }, i * 10)                       
+        }
     }
-    setTimeout(fillTrackers, 250);
+    fade(-0.1)
+    setTimeout(() => {
+        document.getElementById("trackers-list").innerHTML = "";
+        getTrackers(userHash);
+        fade(0.1);
+    }, 110)
 }
