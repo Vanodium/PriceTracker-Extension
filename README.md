@@ -2,4 +2,4 @@ This is my chrome extension, which interracts with [API](https://github.com/Vano
 
 To start tracking price, hold **shift** and **click** on it directly. Now you can open extension and press <img width="12" alt="**+**" src="https://github.com/user-attachments/assets/74a6b41d-5fed-4180-9da6-359a34fa3d91"> to start tracking!
 
-*tracker breaks if it meets a captcha or any other parsing blocker*
+*tracker breaks if it meets a captcha or any other parsing blocker so PriceTracker may not work for some websites*
