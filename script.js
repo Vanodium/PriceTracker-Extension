@@ -2,8 +2,8 @@
 const apiLink = "http://127.0.0.1:8989"
 
 chrome.storage.sync.get(["USERHASH"], (data) => {
-    let userHash = data["USERHASH"]
-    console.log(userHash)
+    let userHash = data["USERHASH"];
+    console.log(userHash);
     if (userHash == undefined) {
         changeVisibility("flex", "oauth-layout");
         changeVisibility("none", "trackers-layout");
@@ -20,9 +20,9 @@ chrome.storage.sync.get(["USERHASH"], (data) => {
 
 function changeVisibility(status, blockId="", blockClass="") {
     if (blockId) {
-        document.getElementById(blockId).style.display = status
+        document.getElementById(blockId).style.display = status;
     } else {
-        document.getElementsByClassName(blockClass)[0].style.display = status
+        document.getElementsByClassName(blockClass)[0].style.display = status;
     }
 }
 
