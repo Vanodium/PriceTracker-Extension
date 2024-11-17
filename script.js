@@ -4,7 +4,7 @@ const apiLink = "http://127.0.0.1:8989";
 chrome.storage.sync.get(["USERHASH"], (data) => {
     let userHash = data["USERHASH"];
     console.log(userHash);
-    if (userHash == undefined) {
+    if (userHash == undefined || userHash == "") {
         changeVisibility("flex", "oauth-layout");
         changeVisibility("none", "trackers-layout");
 
@@ -97,7 +97,6 @@ function addTracker(userHash) {
 }
 
 function addTrackerRequest(searchParameters) {
-    console.log(searchParameters.toString());
     fetch(`${apiLink}/trackers?${searchParameters.toString()}`, {method: "POST"})
     .then(response => {
         if (!response.ok) {
