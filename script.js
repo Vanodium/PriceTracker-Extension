@@ -27,10 +27,9 @@ function changeVisibility(status, blockId="", blockClass="") {
 }
 
 function sendAuthRequest() {
-    fetch(`${apiLink}/auth/token`, { 
-        method: 'GET'
-    })
-    .then(function(response) { return response.json(); })
+    fetch(`${apiLink}/auth/oauth`)
+    .then(function(response) { 
+        return response.json(); })
     .then(function(json) {
         chrome.storage.sync.set({"USERHASH": json["data"]});
         chrome.runtime.reload();
